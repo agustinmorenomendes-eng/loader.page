@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Script Loader</title>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 8px;
+      width: 320px;
+      text-align: center;
+    }
+    input, button, textarea {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background: #6a5acd;
+      color: white;
+      cursor: pointer;
+    }
+    textarea {
+      height: 80px;
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Acceso privado</h2>
+  <input type="password" id="key" placeholder="Ingresa la key">
+  <button onclick="checkKey()">Entrar</button>
+
+  <div id="content" style="display:none;">
+    <textarea id="loader" readonly></textarea>
+    <button onclick="copy()">Copiar loadstring</button>
+  </div>
+</div>
+
+<script>
+  const PASSWORD = "cristx.xz"; // 🔐 TU KEY
+  const SCRIPT_URL = "https://raw.githubusercontent.com/agustinmorenomendes-eng/cristxzscripts/main/cristxzscripts.lua";
+
+  function checkKey() {
+    const key = document.getElementById("key").value;
+    if (key === PASSWORD) {
+      document.getElementById("content").style.display = "block";
+      document.getElementById("loader").value =
+        `loadstring(game:HttpGet("${SCRIPT_URL}"))()`;
+    } else {
+      alert("Key incorrecta");
+    }
+  }
+
+  function copy() {
+    const text = document.getElementById("loader");
+    text.select();
+    document.execCommand("copy");
+    alert("Loadstring copiado");
+  }
+</script>
+
+</body>
+</html>
